@@ -3,7 +3,7 @@
 </h1>
 
 <h3 align="center">
-  Foodfly
+  Gym-manager
 </h3>
 
 <blockquote align="center">“Projeto desenvolvido no bootcamp da Rocketseat”</blockquote>
@@ -27,7 +27,41 @@
   <a href="#memo-licença">Licença</a>
 </p>
 
+## :rocket: Tecnologias:
 
+Esse projeto foi desenvolvido com as seguintes tecnologias:
+
+- [HTML][html]
+- [CSS][css]
+- [Java][js]
+- [Node.js][nodejs]
+- [Express][express]
+- [Nunjucks][njk]
+- [PostgreSQL][postgresql]
+
+## :construction_worker: Como usar: (Em desenvolvimento)
+
+Para clonar e executar essa aplicação você vai precisar dos seguintes softwares instalados em seu computador: 
+- [Git][git]
+- [Node][nodejs]
+- [PostgreSQL][postgresql]
+
+### :electric_plug: Instalar dependências e rodar a aplicação:
+
+```bash
+# Clone este repositório:
+$ git clone https://github.com/i-ramoss/Foodfy.git
+
+# Entre no repositório:
+$ cd Foodfy
+
+# Instale as dependências:
+$ npm install
+
+# Inicie o servidor
+$ npm start
+
+# A aplicação estará rodando na porta 5000 (http://localhost:5000/)
 
 
 ## :memo: Licença
