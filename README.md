@@ -62,7 +62,7 @@ $ npm install
 $ npm start
 
 # A aplicação estará rodando na porta 5000 (http://localhost:5000/)
-
+```
 
 ## :memo: Licença
 
