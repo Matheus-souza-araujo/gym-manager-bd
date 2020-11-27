@@ -71,3 +71,14 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](/LICENSE) para m
 ---
 
 Feito com :purple_heart: by [Rocketseat](https://rocketseat.com.br) :wave: [Entre na nossa comunidade!](https://discordapp.com/invite/gCRAFhc)
+
+[html]: https://developer.mozilla.org/pt-BR/docs/Web/HTML
+[css]: https://developer.mozilla.org/pt-BR/docs/Web/CSS
+[js]: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript
+[nodejs]: https://nodejs.org/en/
+[express]: https://expressjs.com/pt-br/
+[njk]: https://mozilla.github.io/nunjucks/
+[postgresql]: https://www.postgresql.org/
+[git]: https://git-scm.com
+[license]: https://github.com/i-ramoss/Foodfy/blob/master/LICENSE
+[linkedin]: https://www.linkedin.com/in/ian-ramos/
