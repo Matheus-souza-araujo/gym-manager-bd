@@ -5,6 +5,7 @@ const methodOverride = require('method-override')
 
 
 const server = express() //executa o express, variavel express vira uma função
+
 server.use(express.urlencoded({extended: true}))
 server.use(express.static('public'))//use é um middleware
 server.use(methodOverride('_method'))

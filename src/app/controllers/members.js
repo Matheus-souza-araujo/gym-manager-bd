@@ -30,6 +30,10 @@ module.exports = {
         return
     },
 
+    edit(req, res) {
+        return
+    },
+
     put(req, res) {
         const keys = Object.keys(req.body) /*é um construtor*/
 
