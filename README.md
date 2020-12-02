@@ -8,7 +8,7 @@
 
 <blockquote align="center">“Projeto desenvolvido no bootcamp da Rocketseat”</blockquote>
 
-<p align="center">
+<p align="center">     
 
   <a href="https://rocketseat.com.br">
     <img alt="Made by Rocketseat" src="https://img.shields.io/badge/made%20by-Rocketseat-%23F8952D">
@@ -53,7 +53,7 @@ Para clonar e executar essa aplicação você vai precisar dos seguintes softwar
 $ git clone https://github.com/i-ramoss/Foodfy.git
 
 # Entre no repositório:
-$ cd Foodfy
+$ cd gym-manager-bd
 
 # Instale as dependências:
 $ npm install

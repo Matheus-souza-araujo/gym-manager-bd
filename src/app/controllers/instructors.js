@@ -26,7 +26,7 @@ module.exports = {
         }
 
         Instructor.create(req.body, function(Instructor){
-            return /*res.redirect(`/instructors/${instructor.id}`)*/
+            return res.redirect(`/instructors/${req.body.id}`)
         })
     },
 
@@ -44,7 +44,14 @@ module.exports = {
     },
 
     edit(req, res){
-        return
+
+        Instructor.find(req.params.id, function(instructor){
+            if(!instructor) res.send("Instrutor not found")
+
+            instructor.birth = date(instructor.birth).iso
+
+            return res.render("instructors/edit", { instructor })
+        })
     },
 
     put(req, res) {
@@ -57,12 +64,16 @@ module.exports = {
             }
 
         }
-        let { avatar_url, birth, name, services, gender } = req.body
+        Instructor.update(req.body, function(){
+            return res.redirect(`/instructors/${req.body.id}`)
+        })
 
         return
     },
 
     delete(req, res) {
-        return
+        Instructor.delete(req.body.id, function(){
+            return res.redirect(`/instructors`)
+        })
     },
 }
