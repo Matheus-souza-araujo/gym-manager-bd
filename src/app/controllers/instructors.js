@@ -10,69 +10,59 @@ module.exports = {
         })
     },
 
-    create(req, res) {
-        return res.render("instructors/create")
+    create(req, res){
+        return res.render('instructors/create')
     },
+    post(req, res){
+    
+        const keys = Object.keys(req.body)
 
-    post(req, res) {
-        const keys = Object.keys(req.body) /*é um construtor*/
-
-        for (key of keys) {
-            //req.body.avatar_url
+        for(key of keys) {
             if (req.body[key] == "") {
-                return res.send("please, fill all fieds!")
+                return res.send('Please, fill all fields!')
             }
-
         }
-
-        Instructor.create(req.body, function(Instructor){
-            return res.redirect(`/instructors/${req.body.id}`)
+        Instructor.create(req.body, function(instructor){
+            return res.redirect(`/instructors/${instructor.id}`)
         })
+    
     },
-
-    show(req, res) {
+    show(req, res){
         Instructor.find(req.params.id, function(instructor){
-            if(!instructor) res.send("Instrutor not found")
-
-            instructor.age = age(instructor.birth)
+            if (!instructor) return res.send("Instructor not found!")
+            instructor.age = age (instructor.birth)
             instructor.services = instructor.services.split(",")
 
             instructor.created_at = date(instructor.created_at).format
 
-            return res.render("instructors/show", {instructor})
+            return res.render("instructors/show", { instructor })
         })
     },
-
     edit(req, res){
+        Instructor.find(req.params.id, function(instructor) {
+            if (!instructor) return res.send("Instructor not found!")
 
-        Instructor.find(req.params.id, function(instructor){
-            if(!instructor) res.send("Instrutor not found")
-
-            instructor.birth = date(instructor.birth).iso
+            instructor.birth = date (instructor.birth).iso
 
             return res.render("instructors/edit", { instructor })
         })
     },
+    put(req, res){
+        const keys = Object.keys(req.body)
 
-    put(req, res) {
-        const keys = Object.keys(req.body) /*é um construtor*/
-
-        for (key of keys) {
-            //req.body.avatar_url
+        for(key of keys) {
             if (req.body[key] == "") {
-                return res.send("please, fill all fieds!")
+                return res.send('Please, fill all fields!')
             }
-
-        }
-        Instructor.update(req.body, function(){
+         }
+    
+        Instructor.update(req.body, function() {
             return res.redirect(`/instructors/${req.body.id}`)
         })
 
-        return
     },
-
-    delete(req, res) {
-        Instructor.delete(req.body.id, function(){
+    delete(req, res){
+        Instructor.delete(req.body.id, function() {
             return res.redirect(`/instructors`)
         })
     },

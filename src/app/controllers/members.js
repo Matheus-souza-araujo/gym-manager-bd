@@ -26,13 +26,13 @@ module.exports = {
         }
 
         Member.create(req.body, function(Member){
-            return res.redirect(`/members/${req.body.id}`)
+            return res.redirect(`/instructors/${instructor.id}`)
         })
     },
 
     show(req, res) {
         Member.find(req.params.id, function(member){
-            if(!member) res.send("Instrutor not found")
+            if(!member) res.send("Member not found")
 
             member.birth = date(member.birth).birthDay
 
@@ -44,7 +44,7 @@ module.exports = {
     edit(req, res){
 
         Member.find(req.params.id, function(member){
-            if(!member) res.send("Instrutor not found")
+            if(!member) res.send("Member not found")
 
             member.birth = date(member.birth).iso
 
