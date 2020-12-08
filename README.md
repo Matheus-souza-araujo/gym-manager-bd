@@ -50,7 +50,7 @@ Para clonar e executar essa aplicação você vai precisar dos seguintes softwar
 
 ```bash
 # Clone este repositório:
-$ git clone https://github.com/i-ramoss/Foodfy.git
+$ git clone https://github.com/Matheus-souza-araujo/gym-manager-bd
 
 # Entre no repositório:
 $ cd gym-manager-bd
