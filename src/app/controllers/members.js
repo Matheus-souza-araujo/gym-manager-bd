@@ -11,7 +11,10 @@ module.exports = {
     },
 
     create(req, res) {
-        return res.render("members/create")
+        Member.instructorsSelectOpstions(function(options){
+            return res.render("members/create", {instructorsOptions: options})
+        })
+
     },
 
     post(req, res) {
@@ -48,7 +51,9 @@ module.exports = {
 
             member.birth = date(member.birth).iso
 
-            return res.render("members/edit", { member })
+            Member.instructorsSelectOpstions(function(options){
+                return res.render("members/edit", {member, instructorsOptions: options})
+            })
         })
     },
 

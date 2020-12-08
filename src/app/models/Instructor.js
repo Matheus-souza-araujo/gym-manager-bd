@@ -1,18 +1,23 @@
-const {  date } = require('../../lib/utils')
+const { date } = require('../../lib/utils')
 
 const db = require('../../config/db')
 
 module.exports = {
-    all(callback){
+    all(callback) {
 
-        db.query(`SELECT * FROM instructors`,function(err,results){
+        db.query(`
+        SELECT INSTRUCTORS.*,COUNT(MEMBERS) AS TOTAL_STUDENTS
+        FROM INSTRUCTORS
+        LEFT JOIN MEMBERS ON (MEMBERS.INSTRUCTOR_ID = INSTRUCTORS.ID)
+        GROUP BY INSTRUCTORS.ID
+        ORDER BY TOTAL_STUDENTS DESC`, function (err, results) {
             if (err) throw `DataBase ERROR! ${err}`
 
             callback(results.rows)
-            
+
         })
     },
-    create(data, callback){
+    create(data, callback) {
         const query = `
             INSERT INTO instructors(
                 name, 
@@ -45,8 +50,8 @@ module.exports = {
         db.query(`
         SELECT * 
         FROM instructors
-        WHERE id = $1`, [id], function(err, results) {
-            if(err) throw `Database Error! ${err}`
+        WHERE id = $1`, [id], function (err, results) {
+            if (err) throw `Database Error! ${err}`
             callback(results.rows[0])
         })
     },
@@ -70,13 +75,13 @@ module.exports = {
             data.id
         ]
 
-        db.query(query, values, function(err, results){
-            if(err) throw `DataBase ERROR! ${err}`
-                callback()
+        db.query(query, values, function (err, results) {
+            if (err) throw `DataBase ERROR! ${err}`
+            callback()
         })
     },
     delete(id, callback) {
-        db.query(`DELETE FROM instructors WHERE id = $1`,[id], function(err, results){
+        db.query(`DELETE FROM instructors WHERE id = $1`, [id], function (err, results) {
             if (err) throw `DataBase ERROR! ${err}`
 
             return callback()

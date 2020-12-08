@@ -5,7 +5,10 @@ const db = require('../../config/db')
 module.exports = {
     all(callback) {
 
-        db.query(`SELECT * FROM members`, function (err, results) {
+        db.query(`
+        SELECT * 
+        FROM members 
+        ORDER BY name ASC`, function (err, results) {
             if (err) throw `DataBase ERROR! ${err}`
 
             callback(results.rows)
@@ -22,8 +25,9 @@ module.exports = {
                 birth,
                 blood,
                 weight,
-                height
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+                height,
+                instructor_id
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
             RETURNING id
         `
 
@@ -36,6 +40,7 @@ module.exports = {
             data.blood,
             data.weight,
             data.height,
+            data.instrutor_id
         ]
 
         db.query(query, values, function (err, results) {
@@ -49,9 +54,9 @@ module.exports = {
         db.query(`
                 SELECT * 
                 FROM MEMBERS 
-                WHERE ID = $1`, [id], function(err, results) {
-                if(err) throw `DataBase ERROR! ${err}`
-                callback(results.rows[0])
+                WHERE ID = $1`, [id], function (err, results) {
+            if (err) throw `DataBase ERROR! ${err}`
+            callback(results.rows[0])
         })
     },
     update(data, callback) {
@@ -64,8 +69,9 @@ module.exports = {
             email=($5),
             blood=($6),
             weight=($7),
-            height=($8)
-        WHERE id = $9
+            height=($8),
+            instructor_id=($9)
+        WHERE id = $10
         `
 
         const values = [
@@ -77,6 +83,7 @@ module.exports = {
             data.blood,
             data.weight,
             data.height,
+            data.instrutor_id,
             data.id
         ]
 
@@ -90,6 +97,13 @@ module.exports = {
             if (err) throw `DataBase ERROR! ${err}`
 
             return callback()
+        })
+    },
+    instructorsSelectOpstions(callback) {
+        db.query(`SELECT NAME, ID FROM INSTRUCTORS`, function(err, results){
+            if (err) throw `Database Error!`
+
+            callback(results.rows)
         })
     }
 }
