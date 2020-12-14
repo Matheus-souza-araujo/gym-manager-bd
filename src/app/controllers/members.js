@@ -11,8 +11,8 @@ module.exports = {
     },
 
     create(req, res) {
-        Member.instructorsSelectOpstions(function(options){
-            return res.render("members/create", {instructorsOptions: options})
+        Member.instructorsSelectOptions(function(options){
+            return res.render("members/create", {instructorOptions: options})
         })
 
     },
@@ -28,8 +28,8 @@ module.exports = {
 
         }
 
-        Member.create(req.body, function(Member){
-            return res.redirect(`/instructors/${instructor.id}`)
+        Member.create(req.body, function(member){
+            return res.redirect(`/members/${member.id}`)
         })
     },
 
@@ -47,12 +47,12 @@ module.exports = {
     edit(req, res){
 
         Member.find(req.params.id, function(member){
-            if(!member) res.send("Member not found")
+            if(!member) return res.send("Member not found")
 
             member.birth = date(member.birth).iso
 
-            Member.instructorsSelectOpstions(function(options){
-                return res.render("members/edit", {member, instructorsOptions: options})
+            Member.instructorsSelectOptions(function(options){
+                return res.render("members/edit", {member,instructorOptions: options})
             })
         })
     },
