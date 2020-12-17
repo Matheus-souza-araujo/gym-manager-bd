@@ -9,21 +9,28 @@ for (item of menuItens){
 
 //lógica de como apresentar os núemeros de qual página está
 let totalPages = 20,
-    selectedPage = 15,
+    selectedPage = 5,
     pages = [],
-    oldpage
+    oldPage
 
 for (let currentPage = 1; currentPage <= totalPages; currentPage++){
 
     const firstAndLastPage = currentPage == 1 || currentPage == totalPages
     const pagesAfterSelectedPage = currentPage <= selectedPage + 2
-    const pagesBeforeSelectedPag = currentPage>= selectedPage - 2
+    const pagesBeforeSelectedPage = currentPage>= selectedPage - 2
 
-    if(firstAndLastPage || pagesBeforeSelectedPag && pagesAfterSelectedPage){
+    if(firstAndLastPage || pagesBeforeSelectedPage && pagesAfterSelectedPage){
+        if (oldPage && currentPage - oldPage > 2) {
+            pages.push("...")
+        }
+
+        if (oldPage && currentPage - oldPage == 2) {
+            pages.push(oldPage + 1)
+        }
+
         pages.push(currentPage)
 
-
-        oldpage = currentPage
+        oldPage = currentPage
     }
 }
 
