@@ -57,13 +57,13 @@ module.exports = {
     },
     findBy(filter, callback){
         db.query(`
-        SELECT INSTRUCTORS.*, COUNT(MEMBERS) AS TOTAL_STUDENTS
-        FROM INSTRUCTORS
-        LEFT JOIN MEMBERS ON (INSTRUCTORS.ID = MEMBERS.INSTRUCTOR_ID)
-        WHERE INSTRUCTORS.NAME ILIKE '%${filter}%'
-        OR INSTRUCTORS.SERVICES ILIKE '%${filter}%'
-        GROUP BY INSTRUCTORS.ID
-        ORDER BY TOTAL_STUDENTS DESC`, function (err, results) {
+        SELECT instructors.*, COUNT(members) AS total_students
+        FROM instructors
+        LEFT JOIN members ON (instructors.ID = members.INSTRUCTOR_ID)
+        WHERE instructors.NAME ILIKE '%${filter}%'
+        OR instructors.SERVICES ILIKE '%${filter}%'
+        GROUP BY instructors.ID
+        ORDER BY total_students DESC`, function (err, results) {
             if (err) throw `DataBase ERROR! ${err}`
 
             callback(results.rows)
@@ -105,20 +105,31 @@ module.exports = {
     paginate(params) {
         const {filter, limit, offset, callback} = params
 
-        let query = `
-        SELECT INSTRUCTORS.*, COUNT (MEMBERS) AS TOTAL_STUDENTS 
-        FROM INSTRUCTORS
-        LEFT JOIN MEMBERS ON (INSTRUCTORS.ID = MEMBERS.INSTRUCTOR_ID)
-        `
+        let query = "",
+            filterQuery = "",
+            totalQuery = `(
+                SELECT count(*) FROM instructors
+            ) AS total`
+
+        
 
         if(filter) {
-            query = `${query}
-            WHERE INSTRUCTORS.NAME ILIKE '%${filter}%'
-            OR INSTRUCTORS.SERVICES ILIKE '%${filter}%'`
+            filterQuery = `
+            WHERE instructors.name ILIKE '%${filter}%'
+            OR instructors.services ILIKE '%${filter}%'`
+
+            totalQuery = `(
+                SELECT count(*) FROM instructors
+                ${filterQuery}
+            ) as total`
         }
 
-        query = `${query}
-        GROUP BY INSTRUCTORS.ID LIMIT $1 OFFSET $2
+        query = `
+        SELECT instructors.*, ${totalQuery}, COUNT(members) AS total_students 
+        FROM instructors
+        LEFT JOIN members ON (instructors.id = members.instructor_id)
+        ${filterQuery}
+        GROUP BY instructors.id LIMIT $1 OFFSET $2
         `
 
         db.query(query,[limit, offset], function(err, results){

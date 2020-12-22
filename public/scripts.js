@@ -8,9 +8,8 @@ for (item of menuItens){
 }
 
 //lógica de como apresentar os núemeros de qual página está
-let totalPages = 20,
-    selectedPage = 5,
-    pages = [],
+function pagination(selectedPage, totalPages){
+    let pages = [],
     oldPage
 
 for (let currentPage = 1; currentPage <= totalPages; currentPage++){
@@ -34,4 +33,5 @@ for (let currentPage = 1; currentPage <= totalPages; currentPage++){
     }
 }
 
-console.log(pages)
+return pages;
+}
